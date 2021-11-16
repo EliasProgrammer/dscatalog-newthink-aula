@@ -26,7 +26,6 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		
 		return ResponseEntity.status(notFound).body(err);
-		
 	}
 	
 }
