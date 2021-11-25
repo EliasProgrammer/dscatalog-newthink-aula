@@ -1,5 +1,7 @@
 package com.newthink.dscatalog.entities;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -15,78 +17,53 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_category")
-public class Category implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String name;
-	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant createdAt;
-	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updateAt;
-	
-	@PrePersist
-	public void prePersist() {
-		createdAt = Instant.now();
-	}
-	
-	@PreUpdate
-	public void preUpdate() {
-		updateAt = Instant.now();	
-	}
-	
-	public Category() {
-	}
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class Category implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	public Category(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Setter
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+	@Setter
+    private String name;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Setter
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant createdAt;
 
-	public String getName() {
-		return name;
-	}
+	@Setter
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updateAt;
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public Instant getCreatedAt() {
-		return createdAt;
-	}
+    @PrePersist
+    public void prePersist() {
+        createdAt = Instant.now();
+    }
 
-	public Instant getUpdateAt() {
-		return updateAt;
-	}
+    @PreUpdate
+    public void preUpdate() {
+        updateAt = Instant.now();
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Category other = (Category) obj;
-		return Objects.equals(id, other.id);
-	}
-	
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Category other = (Category) obj;
+        return Objects.equals(id, other.id);
+    }
+
 }
